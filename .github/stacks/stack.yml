@@ -17,9 +17,6 @@ inputs:
  - name: RepoName
    default: myRailsApp
    description: Name of the new repo created from this stack
- - name: Repo_Description
-   default: "This is a repo with a Rails App + MYSQL DB"
-   description: Description of the new repo created from this stack
  - name: Reviewer_Count
    default: 2
    description: Number of required reviewers for PR
@@ -48,15 +45,8 @@ inputs:
 #-------------------------------------------------------------
 
 configs:
-# Meta data for creating the new repository
-- repo-metadata:
-    parameters:
-      description: {{ inputs.Repo_Description }}
-      topics:
-      - rails
-      - sql
 
- # Branch protection rules
+# Branch protection rules
 - branches:
    - name: release_v? #branch name or pattern you want to protect
      parameters:
