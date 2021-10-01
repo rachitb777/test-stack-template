@@ -1,0 +1,46 @@
+name: azure-node-app
+description: This is a stack for deploying a Node Apps to Azure
+inputs:
+ - name: Reviewer_Count
+   default: 2
+   description: Number of required reviewers for PR
+   validvalues:
+   - 2
+   - 3
+   - 4
+   - 5
+   - 6
+configs:
+- branches:
+  - name: dev #branch name or pattern you want to protect
+    parameters:
+      enforce-admins: true
+      dismiss-stale-reviews: true
+      require-code-owner-reviews: true
+      required-approving-review-count: {{ inputs.Reviewer_Count }}
+      allow-force-pushes: false
+      allow-deletions: false
+  - name: release*? #branch name or pattern you want to protect
+    parameters:
+      enforce-admins: true
+      dismiss-stale-reviews: true
+      require-code-owner-reviews: true
+      required-approving-review-count: 2
+      allow-force-pushes: false
+      allow-deletions: false
+- environments:
+  - name: staging
+    parameters:
+     protected-branches: false
+     custom-branch-policies: true
+  - name: production
+    parameters:
+      protected-branches: true
+      custom-branch-policies: true
+      reviewers:
+      - id: "monalisa"
+        type: User
+- security:
+    parameters:
+      vulnerability-alerts: true
+      automated-security-fixes: true
