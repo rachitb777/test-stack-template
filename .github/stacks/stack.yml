@@ -28,19 +28,3 @@ configs:
       required-approving-review-count: 2
       allow-force-pushes: false
       allow-deletions: false
-- environments:
-  - name: staging
-    parameters:
-     protected-branches: false
-     custom-branch-policies: true
-  - name: production
-    parameters:
-      protected-branches: true
-      custom-branch-policies: true
-      reviewers:
-      - id: "monalisa"
-        type: User
-- security:
-    parameters:
-      vulnerability-alerts: true
-      automated-security-fixes: true
