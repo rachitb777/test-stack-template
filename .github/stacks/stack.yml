@@ -53,7 +53,7 @@ configs:
        enforce-admins: true
        dismiss-stale-reviews: true
        require-code-owner-reviews: true
-       required-approving-review-count: {{ inputs.Reviewer_Count }}
+       required-approving-review-count: ${{ inputs.Reviewer_Count }}
        allow-force-pushes: false
        allow-deletions: false
    
@@ -62,7 +62,7 @@ configs:
        enforce-admins: true
        dismiss-stale-reviews: true
        require-code-owner-reviews: true
-       required-approving-review-count: {{ inputs.Reviewer_Count }}
+       required-approving-review-count: ${{ inputs.Reviewer_Count }}
        allow-force-pushes: false
        allow-deletions: false
 
@@ -73,40 +73,22 @@ configs:
         protected-branches: false
         secrets:
           - name: Azure_SPN_ID
-            value: "inputs.STAGING_SPN_ID"
+            value: ${{ inputs.STAGING_SPN_ID }}
           - name: MYSQL_Connection_String
-            value: "inputs.MYSQL_Connection_String"
+            value: $${{ inputs.MYSQL_Connection_String }}
 
     - name: production
       parameters: 
         protected-branches: true
         secrets:
           - name: Azure_SPN_ID
-            value: "inputs.PROD_SPN_ID"
+            value: ${{ inputs.PROD_SPN_ID }}
           - name: SQL_Connection_String
-            value: "inputs.SQL_Connection_String"
+            value: ${{ inputs.SQL_Connection_String }}
 
 # Security and configuration settings to be enabled/disabled
 - security:
     parameters: 
-      vulnerability-alerts: {{inputs.Enable_Vulnerability_Alerts}}
+      vulnerability-alerts: ${{inputs.Enable_Vulnerability_Alerts}}
       automated-security-fixes: true
 
-#-------------------------------------------------------------
-# Initialization workflow to run
-init:
-#This workflow file will NOT be part of the stack (new repo created). 
-# workflow could use the stack inputs using the notation : ${{ github.event.inputs.name }}
- - uses: ".github/workflows/setup.yml"
-
-# This section will be enhanced to define other Stack operations: up, build, deploy etc.
-
-github-apps:
-- slug: Azure
-  parameters:
-     environment: production
-     secrets:
-       - name: Azure_SPN_ID
-       - name: Azure_Tenant_ID
-
-- slug: codetree
