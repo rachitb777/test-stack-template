@@ -26,22 +26,7 @@ inputs:
    - 4
    - 5
    - 6
- - name: DEV_SPN_ID
-   description: SPN ID for Dev deployments
-   is_secret: true
- - name: STAGING_SPN_ID
-   description: SPN ID for STAGING deployments
- - name: PROD_SPN_ID
-   description: SPN ID for Prod deployments
- - name: MYSQL_Connection_String
-   description: DB credentials
- - name: Enable_Vulnerability_Alerts
-   description: Enable Vulnerability Alerts
-   type: boolean
- - name: init_script_echo
-   default: "hello rails app"
-   description: this would be consumed by init script
-   required: false
+
 #-------------------------------------------------------------
 
 configs:
@@ -65,30 +50,3 @@ configs:
        required-approving-review-count: ${{ inputs.Reviewer_Count }}
        allow-force-pushes: false
        allow-deletions: false
-
- # Environments & variables(secrets) to be created
-- environments: 
-    - name: staging
-      parameters: 
-        protected-branches: false
-        secrets:
-          - name: Azure_SPN_ID
-            value: ${{ inputs.STAGING_SPN_ID }}
-          - name: MYSQL_Connection_String
-            value: $${{ inputs.MYSQL_Connection_String }}
-
-    - name: production
-      parameters: 
-        protected-branches: true
-        secrets:
-          - name: Azure_SPN_ID
-            value: ${{ inputs.PROD_SPN_ID }}
-          - name: SQL_Connection_String
-            value: ${{ inputs.SQL_Connection_String }}
-
-# Security and configuration settings to be enabled/disabled
-- security:
-    parameters: 
-      vulnerability-alerts: ${{inputs.Enable_Vulnerability_Alerts}}
-      automated-security-fixes: true
-
