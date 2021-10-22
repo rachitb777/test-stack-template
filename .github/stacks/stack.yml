@@ -14,7 +14,15 @@ inputs:
     - 4
     - 5
     - 6
-
+  - name: input_field
+    description: text input field
+    required: true
+    
+  - name: secret_field
+    description: secret input field
+    required: true
+    
+    
 #-------------------------------------------------------------
 configs:
       
