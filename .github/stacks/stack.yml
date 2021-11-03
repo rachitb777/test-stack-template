@@ -20,6 +20,7 @@ inputs:
     
   - name: secret_field
     description: secret input field
+    is-secret: true
     required: true
     
     
