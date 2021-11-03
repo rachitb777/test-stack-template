@@ -22,7 +22,21 @@ inputs:
     description: secret input field
     is-secret: true
     required: true
-    
+
+  - name: input_field_false
+    description: text input field
+    required: true
+    is-secret: false
+
+- name: input_field_false_not_mandatory
+    description: text input field not mandatory
+    required: false
+    is-secret: false
+
+- name: secret_input_field_false_not_mandatory
+    description: secret input field not mandatory
+    required: false
+    is-secret: true
     
 #-------------------------------------------------------------
 configs:
