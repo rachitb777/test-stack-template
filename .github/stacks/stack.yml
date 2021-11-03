@@ -28,12 +28,12 @@ inputs:
     required: true
     is-secret: false
 
-- name: input_field_false_not_mandatory
+  - name: input_field_false_not_mandatory
     description: text input field not mandatory
     required: false
     is-secret: false
 
-- name: secret_input_field_false_not_mandatory
+  - name: secret_input_field_false_not_mandatory
     description: secret input field not mandatory
     required: false
     is-secret: true
