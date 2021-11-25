@@ -5,15 +5,6 @@ branding:
   color: 'blue'
 
 inputs:
-  - name: Reviewer_Count
-    default: 2
-    description: Number of required reviewers for PR
-    validvalues: 
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
   - name: input_field
     description: text input field
     required: true
@@ -22,41 +13,16 @@ inputs:
     description: secret input field
     is-secret: true
     required: true
-
-  - name: input_field_false
-    description: text input field
-    required: true
-    is-secret: false
-
-  - name: input_field_false_not_mandatory
-    description: text input field not mandatory
-    required: false
-    is-secret: false
-
-  - name: secret_input_field_false_not_mandatory
-    description: secret input field not mandatory
-    required: false
-    is-secret: true
     
 #-------------------------------------------------------------
 configs:
       
-  # Branch Protection rules
-  branches:
-    - name: release_v? #branch name or pattern you want to protect
-      parameters:
-        enforce-admins: true
-        dismiss-stale-reviews: true
-        require-code-owner-reviews: true
-        required-approving-review-count: ${{ inputs.Reviewer_Count }}
-        allow-force-pushes: false
-        allow-deletions: false
-   
-    - name: dev_v? #branch name or pattern you want to protect
-      parameters:
-        enforce-admins: true
-        dismiss-stale-reviews: true
-        require-code-owner-reviews: true
-        required-approving-review-count: ${{ inputs.Reviewer_Count }}
-        allow-force-pushes: false
-        allow-deletions: false
+ environments: 
+    - name: staging
+      parameters: 
+        protected-branches: false
+
+    - name: production
+      parameters: 
+        protected-branches: false
+
